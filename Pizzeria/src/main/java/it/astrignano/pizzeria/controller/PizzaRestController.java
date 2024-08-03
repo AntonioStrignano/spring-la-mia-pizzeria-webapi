@@ -24,14 +24,14 @@ import jakarta.validation.Valid;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/api/pizzeria/")
+@RequestMapping("/api/pizzeria")
 public class PizzaRestController {
 
 	@Autowired
 
 	private PizzaService pizzaService;
 
-	@GetMapping("{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<Payload<PizzaModel>> get(@PathVariable("id") Integer idPizza) {
 
 		Optional<PizzaModel> pizza = pizzaService.findById(idPizza);
@@ -47,23 +47,25 @@ public class PizzaRestController {
 
 	@PostMapping
 	public ResponseEntity<Payload<PizzaModel>> store(@Valid @RequestBody PizzaModel pizza) {
+		
 		PizzaModel pizzaSalvata = pizzaService.save(pizza);
-		Optional<PizzaModel> pizzaSalvataOpt = pizzaService.;
-		if (pizzaSalvata.isPre){
+		
+		Optional<PizzaModel> pizzaCheck = pizzaService.findById(pizzaSalvata.getId());
+		if (pizzaCheck.isPresent()){
 			return ResponseEntity.ok(new Payload<PizzaModel>(pizzaSalvata, null, HttpStatus.OK));
 		} else {
-			return new ResponseEntity<Payload<PizzaModel>>( new Payload<PizzaModel>(null, "Errore nel salvataggio della pizza.", HttpStatus.INTERNAL_SERVER_ERROR),HttpStatus.INTERNAL_SERVER_ERROR); {
+			return new ResponseEntity<Payload<PizzaModel>>( new Payload<PizzaModel>(null, "Errore nel salvataggio della pizza.", HttpStatus.INTERNAL_SERVER_ERROR),HttpStatus.INTERNAL_SERVER_ERROR); 
 //			return new ResponseEntity<>("Errore nel salvataggio della pizza.", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
-	@PutMapping("{id}")
+	@PutMapping("/ {id}")
 	public ResponseEntity<Payload<PizzaModel>> update(@PathVariable("id") Integer idPizza,
 			@RequestBody PizzaModel pizza) {
 
 		try {
 			PizzaModel pizzaUpdate = pizzaService.update(idPizza, pizza);
-			return ResponseEntity.ok(pizzaUpdate);
+			return ResponseEntity.ok(Payload<PizzaModel>(pizzaUpdate, null, HttpStatus.OK));
 		} catch (IllegalArgumentException e) {
 			return new ResponseEntity<>("Pizza non trovata.", HttpStatus.NOT_FOUND);
 		} catch (Exception e) {

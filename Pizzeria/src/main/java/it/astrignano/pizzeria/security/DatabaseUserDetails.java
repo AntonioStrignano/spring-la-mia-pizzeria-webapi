@@ -46,4 +46,7 @@ public class DatabaseUserDetails implements UserDetails {
 		return this.username;
 	}
 
+	
+	
+	
 }

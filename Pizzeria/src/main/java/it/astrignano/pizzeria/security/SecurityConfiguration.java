@@ -15,11 +15,11 @@ public class SecurityConfiguration {
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests().requestMatchers("/pizzeria/create", "pizzeria/edit/**").hasAuthority("ADMIN")
-				.requestMatchers(HttpMethod.POST, "/pizzeria/**").hasAuthority("ADMIN")
+//				.requestMatchers(HttpMethod.POST, "/api/pizzeria/**").hasAuthority("ADMIN")
 				.requestMatchers("/ingredienti", "/ingredienti/**").hasAuthority("ADMIN")
 				.requestMatchers("/offerte", "/offerte/**").hasAuthority("ADMIN")
 				.requestMatchers("/pizzeria", "/pizzeria/**").hasAnyAuthority("ADMIN", "USER").requestMatchers("/**")
-				.permitAll().and().formLogin().and().logout().and().exceptionHandling();
+				.permitAll().and().formLogin().and().logout().and().exceptionHandling().and().csrf().disable();
 
 		return http.build();
 	}

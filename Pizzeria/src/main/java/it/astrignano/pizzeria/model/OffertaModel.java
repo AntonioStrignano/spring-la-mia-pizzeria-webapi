@@ -1,6 +1,9 @@
 package it.astrignano.pizzeria.model;
 
 import java.time.LocalDate;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,10 +28,12 @@ public class OffertaModel {
 	@Column(name="titolo", nullable =false)
 	private String titolo;
 	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@NotNull(message = "La data di inizio e' obbligatoria. ")
 	@Column(name="data_inizio", nullable=false)
 	private LocalDate dataInizio;
 
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@NotNull(message = "La data di fine e' obbligatoria. ")
 	@Column(name="data_fine", nullable=false)
 	private LocalDate dataFine;
