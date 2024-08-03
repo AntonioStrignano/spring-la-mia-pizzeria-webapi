@@ -10,17 +10,18 @@ public class Payload<T> {
 
 	private HttpStatus status;
 
-	//costruttori
-	
-	public Payload() {	}
-	
+	// costruttori
+
+	public Payload() {
+	}
+
 	public Payload(T payload, String errorMessage, HttpStatus status) {
 		this.payload = payload;
 		this.errorMessage = errorMessage;
 		this.status = status;
 	}
 
-	//getter e setter
+	// getter e setter
 	public T getPayload() {
 		return payload;
 	}
@@ -45,7 +46,4 @@ public class Payload<T> {
 		this.status = status;
 	}
 
-	
-	
-	
 }
