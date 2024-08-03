@@ -24,24 +24,23 @@ public class SecurityConfiguration {
 		return http.build();
 	}
 
-	
-		@Bean
-		DatabaseUserDetailService userDetailsService() {
-			return new DatabaseUserDetailService();
-		}
-		
-		@Bean
-		PasswordEncoder passwordEncoder() {
-			return PasswordEncoderFactories.createDelegatingPasswordEncoder();
-		}
-		
-		@Bean
-		DaoAuthenticationProvider authenticatorProvider() {
-			DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-			
-			authProvider.setUserDetailsService(userDetailsService());
-			authProvider.setPasswordEncoder(passwordEncoder());
-			
-			return authProvider;
-		}
+	@Bean
+	DatabaseUserDetailService userDetailsService() {
+		return new DatabaseUserDetailService();
+	}
+
+	@Bean
+	PasswordEncoder passwordEncoder() {
+		return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+	}
+
+	@Bean
+	DaoAuthenticationProvider authenticatorProvider() {
+		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+
+		authProvider.setUserDetailsService(userDetailsService());
+		authProvider.setPasswordEncoder(passwordEncoder());
+
+		return authProvider;
+	}
 }
